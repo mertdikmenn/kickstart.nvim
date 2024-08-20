@@ -86,6 +86,8 @@ P.S. You can delete this when you're done too. It's your config now! :)
 
 vim.cmd 'language en_US'
 
+vim.keymap.set('n', '<C-9>', '<C-]>')
+
 -- Set tab width to 2 spaces and use spaces instead of tabs for indentation
 vim.o.tabstop = 2 -- Number of spaces that a <Tab> in the file counts for
 vim.o.shiftwidth = 2 -- Number of spaces to use for each step of (auto)indent
@@ -251,6 +253,9 @@ require('lazy').setup({
   --
   -- Use `opts = {}` to force a plugin to be loaded.
   --
+  {
+    'github/copilot.vim',
+  },
 
   -- Here is a more advanced example where we pass configuration
   -- options to `gitsigns.nvim`. This is equivalent to the following Lua:
