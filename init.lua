@@ -206,6 +206,9 @@ vim.keymap.set('i', '<A-k>', '<Esc>:m .-2<CR>==gi', { noremap = true, silent = t
 vim.keymap.set('v', '<A-j>', ":m '>+1<CR>gv=gv", { noremap = true, silent = true })
 vim.keymap.set('v', '<A-k>', ":m '<-2<CR>gv=gv", { noremap = true, silent = true })
 
+-- LuaSnip shift-tab keybinding to expand snippet or jump
+vim.api.nvim_set_keymap('i', '<S-Tab>', [[luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<S-Tab>']], { expr = true, silent = true })
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
@@ -255,6 +258,13 @@ require('lazy').setup({
   --
   {
     'github/copilot.vim',
+  },
+  {
+    'L3MON4D3/LuaSnip',
+    config = function()
+      require('luasnip.loaders.from_lua').load { paths = '~/.config/nvim/lua/snippets/' }
+    end,
+    dependencies = { 'rafamadriz/friendly-snippets' }, -- Optional, if you want premade snippets
   },
 
   -- Here is a more advanced example where we pass configuration
@@ -608,6 +618,9 @@ require('lazy').setup({
               },
               -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
               -- diagnostics = { disable = { 'missing-fields' } },
+              diagnostics = {
+                disable = { 'unused-local' },
+              },
             },
           },
         },
